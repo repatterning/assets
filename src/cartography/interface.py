@@ -4,10 +4,10 @@ import boto3
 import geopandas
 import pandas as pd
 
+import src.acquire.maps
+import src.acquire.reference
 import src.cartography.data
 import src.cartography.illustrate
-import src.acquire.maps
-import src.cartography.reference
 import src.elements.s3_parameters as s3p
 import src.s3.keys
 
@@ -41,7 +41,7 @@ class Interface:
         # Maps
         coarse = self.__maps.exc(key_name='cartography/coarse.geojson')
         care = self.__maps.exc(key_name='cartography/care_and_coarse_catchments.geojson')
-        reference = src.cartography.reference.Reference(s3_parameters=self.__s3_parameters).exc()
+        reference = src.acquire.reference.Reference(s3_parameters=self.__s3_parameters).exc()
 
         # Building
         data: geopandas.GeoDataFrame = src.cartography.data.Data(care=care, reference=reference).exc()
