@@ -3,7 +3,7 @@ import sys
 
 import pandas as pd
 
-import src.assets.gauges
+import src.acquire.gauges
 import src.elements.s3_parameters as s3p
 import src.elements.service as sr
 import src.functions.cache
@@ -36,11 +36,8 @@ class Interface:
         :return:
         """
 
-        # Warning data
-        # foci = src.assets.foci.Foci(s3_parameters=self.__s3_parameters).exc()
-
-        # Applicable time series metadata, i.e., gauge, identification codes
-        gauges = src.assets.gauges.Gauges(
+        # The gauges
+        gauges = src.acquire.gauges.Gauges(
             service=self.__service, s3_parameters=self.__s3_parameters, arguments=self.__arguments).exc()
         if gauges.empty:
             src.functions.cache.Cache().exc()

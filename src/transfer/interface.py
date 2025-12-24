@@ -18,7 +18,7 @@ class Interface:
     Class Interface
     """
 
-    def __init__(self, connector: boto3.session.Session, service: sr.Service,  s3_parameters: s3p):
+    def __init__(self, connector: boto3.session.Session, service: sr.Service,  s3_parameters: s3p, arguments: dict):
         """
 
         :param connector:
@@ -27,10 +27,12 @@ class Interface:
         :param service: A suite of services for interacting with Amazon Web Services.<br>
         :param s3_parameters: The overarching S3 parameters settings of this
                               project, e.g., region code name, buckets, etc.<br>
+        :param arguments:
         """
 
         self.__service: sr.Service = service
         self.__s3_parameters: s3p.S3Parameters = s3_parameters
+        self.__arguments: dict = arguments
 
         # Instances
         self.__configurations = config.Config()
@@ -59,7 +61,7 @@ class Interface:
 
         # The strings for transferring data to Amazon S3 (Simple Storage Service)
         strings = self.__dictionary.exc(
-            path=self.__configurations.distributions_, extension='*',
+            path=self.__configurations.pathway_, extension='*',
             prefix=self.__configurations.prefix + '/')
 
         strings = self.__get_metadata(frame=strings.copy())
@@ -72,5 +74,5 @@ class Interface:
         # Transfer
         messages = src.s3.ingress.Ingress(
             service=self.__service, bucket_name=self.__s3_parameters.external).exc(
-            strings=strings, tagging='project=hydrography')
+            strings=strings, tagging=f'project={self.__arguments.get('project_tag')}')
         logging.info(messages)
