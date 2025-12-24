@@ -11,15 +11,15 @@ class Parcels:
     Parcels
     """
 
-    def __init__(self, data: geopandas.GeoDataFrame, assets: pd.DataFrame):
+    def __init__(self, data: geopandas.GeoDataFrame, codes: pd.DataFrame):
         """
 
         :param data: The frame of metrics per gauge station.
-        :param assets: The assets ...
+        :param codes: ['catchment_id', 'ts_id']
         """
 
         self.__data = data
-        self.__assets = assets
+        self.__codes = codes
 
         # Seed
         self.__seed = 5
@@ -41,7 +41,7 @@ class Parcels:
         """
 
         frame = self.__data[['catchment_id', 'catchment_name']].drop_duplicates()
-        frame = frame.copy().loc[frame['catchment_id'].isin(self.__assets['catchment_id'].unique()), :]
+        frame = frame.copy().loc[frame['catchment_id'].isin(self.__codes['catchment_id'].unique()), :]
 
         # Hence
         frame.sort_values(by='catchment_name', inplace=True)
