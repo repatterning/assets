@@ -26,7 +26,7 @@ def main():
 
     # Transfer
     src.transfer.interface.Interface(
-      connector=connector, service=service, s3_parameters=s3_parameters).exc()
+      connector=connector, service=service, s3_parameters=s3_parameters, arguments=arguments).exc()
 
     # Delete Cache Points
     src.functions.cache.Cache().exc()
