@@ -6,7 +6,7 @@ import pandas as pd
 
 import src.cartography.data
 import src.cartography.illustrate
-import src.cartography.maps
+import src.acquire.maps
 import src.cartography.reference
 import src.elements.s3_parameters as s3p
 import src.s3.keys
@@ -29,7 +29,7 @@ class Interface:
         self.__s3_parameters = s3_parameters
 
         # Instances
-        self.__maps = src.cartography.maps.Maps(connector=self.__connector, s3_parameters=self.__s3_parameters)
+        self.__maps = src.acquire.maps.Maps(connector=self.__connector, s3_parameters=self.__s3_parameters)
 
     def exc(self, codes: pd.DataFrame):
         """
