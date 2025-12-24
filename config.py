@@ -20,7 +20,7 @@ class Config:
         Keys
         '''
         self.s3_parameters_key = 's3_parameters.yaml'
-        self.argument_key = 'artefacts/architecture/latest/arguments.json'
+        self.argument_key = 'assets/arguments.json'
 
 
         '''
