@@ -48,4 +48,4 @@ class Interface:
 
         # Draw
         src.cartography.illustrate.Illustrate(
-            data=data, coarse=coarse, codes=codes).exc(_name='assets')
+            points=data, coarse=coarse, codes=codes).exc(_name='assets')
