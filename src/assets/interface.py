@@ -36,7 +36,7 @@ class Interface:
         :return:
         """
 
-        # Applicable time series metadata, i.e., gauge, identification codes
+        # The gauges
         gauges = src.assets.gauges.Gauges(
             service=self.__service, s3_parameters=self.__s3_parameters, arguments=self.__arguments).exc()
         if gauges.empty:
