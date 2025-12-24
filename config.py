@@ -21,11 +21,11 @@ class Config:
 
         # Directories
         self.warehouse = os.path.join(os.getcwd(), 'warehouse')
-        self.distributions_ = os.path.join(self.warehouse, 'distributions')
-        self.maps_ = os.path.join(self.distributions_, 'maps')
+        self.pathway_ = os.path.join(self.warehouse, 'assets')
+        self.maps_ = os.path.join(self.pathway_, 'maps')
 
         # Prefix
-        self.prefix = self.distributions_.replace(os.getcwd() + os.sep, '')
+        self.prefix = self.pathway_.replace(os.getcwd() + os.sep, '')
 
         # The model assets section
         self.origin_ = 'assets/latest'
