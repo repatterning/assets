@@ -31,10 +31,10 @@ class Interface:
         # Instances
         self.__maps = src.cartography.maps.Maps(connector=self.__connector, s3_parameters=self.__s3_parameters)
 
-    def exc(self, assets: pd.DataFrame):
+    def exc(self, codes: pd.DataFrame):
         """
 
-        :param assets:
+        :param codes: ['catchment_id', 'ts_id']
         :return:
         """
 
@@ -48,4 +48,4 @@ class Interface:
 
         # Draw
         src.cartography.illustrate.Illustrate(
-            data=data, coarse=coarse, assets=assets).exc(_name='assets')
+            data=data, coarse=coarse, codes=codes).exc(_name='assets')
