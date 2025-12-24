@@ -36,9 +36,6 @@ class Interface:
         :return:
         """
 
-        # Warning data
-        # foci = src.assets.foci.Foci(s3_parameters=self.__s3_parameters).exc()
-
         # Applicable time series metadata, i.e., gauge, identification codes
         gauges = src.assets.gauges.Gauges(
             service=self.__service, s3_parameters=self.__s3_parameters, arguments=self.__arguments).exc()
