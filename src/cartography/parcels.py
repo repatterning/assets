@@ -11,14 +11,14 @@ class Parcels:
     Parcels
     """
 
-    def __init__(self, data: geopandas.GeoDataFrame, codes: pd.DataFrame):
+    def __init__(self, points: geopandas.GeoDataFrame, codes: pd.DataFrame):
         """
 
-        :param data: The frame of metrics per gauge station.
+        :param points: The frame of metrics per gauge station.
         :param codes: ['catchment_id', 'ts_id']
         """
 
-        self.__data = data
+        self.__points = points
         self.__codes = codes
 
         # Seed
@@ -40,7 +40,7 @@ class Parcels:
         :return:
         """
 
-        frame = self.__data[['catchment_id', 'catchment_name']].drop_duplicates()
+        frame = self.__points[['catchment_id', 'catchment_name']].drop_duplicates()
         frame = frame.copy().loc[frame['catchment_id'].isin(self.__codes['catchment_id'].unique()), :]
 
         # Hence
