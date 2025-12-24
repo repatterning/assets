@@ -1,10 +1,10 @@
-"""Module cartography/data.py"""
+"""Module cartography/points.py"""
 import logging
 import geopandas
 import pandas as pd
 
 
-class Data:
+class Points:
     """
     Data
     """
