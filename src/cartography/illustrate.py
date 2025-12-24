@@ -20,12 +20,12 @@ class Illustrate:
     Illustrate
     """
 
-    def __init__(self, data: geopandas.GeoDataFrame, coarse: geopandas.GeoDataFrame, assets: pd.DataFrame):
+    def __init__(self, data: geopandas.GeoDataFrame, coarse: geopandas.GeoDataFrame, codes: pd.DataFrame):
         """
 
         :param data: A frame of metrics per gauge station, and of care homes.
         :param coarse: The boundaries of the hydrometric catchments
-        :param assets: The assets ...
+        :param codes: ['catchment_id', 'ts_id']
         """
 
         self.__data = data
@@ -36,7 +36,7 @@ class Illustrate:
 
         # Centroid, Parcels
         self.__c_latitude, self.__c_longitude = src.cartography.centroids.Centroids(blob=self.__data).__call__()
-        self.__parcels: list[pcl.Parcel] = src.cartography.parcels.Parcels(data=self.__data, assets=assets).exc()
+        self.__parcels: list[pcl.Parcel] = src.cartography.parcels.Parcels(data=self.__data, codes=codes).exc()
 
     # pylint: disable=R0915
     def exc(self, _name: str):
