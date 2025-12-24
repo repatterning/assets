@@ -20,23 +20,23 @@ class Illustrate:
     Illustrate
     """
 
-    def __init__(self, data: geopandas.GeoDataFrame, coarse: geopandas.GeoDataFrame, codes: pd.DataFrame):
+    def __init__(self, points: geopandas.GeoDataFrame, coarse: geopandas.GeoDataFrame, codes: pd.DataFrame):
         """
 
-        :param data: A frame of metrics per gauge station, and of care homes.
+        :param points: A frame of metrics per gauge station, and of care homes.
         :param coarse: The boundaries of the hydrometric catchments
         :param codes: ['catchment_id', 'ts_id']
         """
 
-        self.__data = data
+        self.__points = points
         self.__coarse = coarse
 
         # Configurations
         self.__configurations = config.Config()
 
         # Centroid, Parcels
-        self.__c_latitude, self.__c_longitude = src.cartography.centroids.Centroids(blob=self.__data).__call__()
-        self.__parcels: list[pcl.Parcel] = src.cartography.parcels.Parcels(data=self.__data, codes=codes).exc()
+        self.__c_latitude, self.__c_longitude = src.cartography.centroids.Centroids(blob=self.__points).__call__()
+        self.__parcels: list[pcl.Parcel] = src.cartography.parcels.Parcels(points=self.__points, codes=codes).exc()
 
     # pylint: disable=R0915
     def exc(self, _name: str):
@@ -77,11 +77,11 @@ class Illustrate:
             vector = folium.FeatureGroup(name=parcel.catchment_name, show=show)
 
             # gauges, care homes
-            instances: geopandas.GeoDataFrame = self.__data.copy().loc[
-                        (self.__data['catchment_id'] == parcel.catchment_id) & (self.__data['focus'] == 'gauge'), :]
+            instances: geopandas.GeoDataFrame = self.__points.copy().loc[
+                        (self.__points['catchment_id'] == parcel.catchment_id) & (self.__points['focus'] == 'gauge'), :]
             instances.to_crs(epsg=3857, inplace=True)
-            leaves: geopandas.GeoDataFrame = self.__data.copy().loc[
-                     (self.__data['catchment_id'] == parcel.catchment_id) & (self.__data['focus'] == 'elders'), :]
+            leaves: geopandas.GeoDataFrame = self.__points.copy().loc[
+                     (self.__points['catchment_id'] == parcel.catchment_id) & (self.__points['focus'] == 'elders'), :]
             leaves.to_crs(epsg=3857, inplace=True)
 
             # Gauges
