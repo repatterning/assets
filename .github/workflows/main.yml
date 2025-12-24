@@ -1,4 +1,4 @@
-name: 'Hydrography: Mapping the distribution of assets of import'
+name: 'Hydrography: Mapping Assets'
 
 on: [push]
 
@@ -45,8 +45,8 @@ jobs:
           echo "Issues in relation to logic (F7), syntax (Python E9, Flake F7), mathematical
           formulae symbols (F63), undefined variable names (F82):"
           
-          printf "\n src/assets "
-          flake8 --count --select=E9,F63,F7,F82 --show-source --statistics src/assets
+          printf "\n src/acquire "
+          flake8 --count --select=E9,F63,F7,F82 --show-source --statistics src/acquire
           
           printf "\n src/cartography "
           flake8 --count --select=E9,F63,F7,F82 --show-source --statistics src/cartography
@@ -71,8 +71,8 @@ jobs:
           printf "\n\n"
           echo "Complexity issues:"
           
-          printf "\n src/assets "
-          flake8 --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics src/assets
+          printf "\n src/acquire "
+          flake8 --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics src/acquire
           
           printf "\n src/cartography "
           flake8 --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics src/cartography
@@ -99,8 +99,8 @@ jobs:
           echo "============================= pylint session starts =============================="
           
           
-          printf "\n Package src/assets"
-          pylint --rcfile .pylintrc src/assets
+          printf "\n Package src/acquire"
+          pylint --rcfile .pylintrc src/acquire
           
           printf "\n Package src/cartography"
           pylint --rcfile .pylintrc src/cartography
