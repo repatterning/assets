@@ -18,13 +18,11 @@ def main():
     logger: logging.Logger = logging.getLogger(__name__)
     logger.info('Starting: %s', datetime.datetime.now().isoformat(timespec='microseconds'))
 
-    # Assets
-    assets = src.assets.interface.Interface(
+    assets = src.acquire.interface.Interface(
         service=service, s3_parameters=s3_parameters, arguments=arguments).exc()
 
-    # Distributions
     src.cartography.interface.Interface(
-        service=service, s3_parameters=s3_parameters, connector=connector).exc(assets=assets)
+        s3_parameters=s3_parameters, connector=connector).exc(assets=assets)
 
     # Transfer
     src.transfer.interface.Interface(
@@ -47,8 +45,8 @@ if __name__ == '__main__':
                         datefmt='%Y-%m-%d %H:%M:%S')
 
     # Modules
+    import src.acquire.interface
     import src.cartography.interface
-    import src.assets.interface
     import src.elements.service as sr
     import src.elements.s3_parameters as s3p
     import src.functions.cache
